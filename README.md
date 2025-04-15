@@ -26,7 +26,7 @@ Select the `Codespaces` tab. Create a codespace on main.
 
 ### GitPod setup
 
-Go to [Gitpod](https://gitpod.io/#https://github.com/honeycombio/academy-instrumentation-java) to open the repository.
+Go to [Gitpod](https://gitpod.io/#https://github.com/honeycombio/academy-intro-refinery) to open the repository.
 
 Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor. The default settings are acceptable.
 
