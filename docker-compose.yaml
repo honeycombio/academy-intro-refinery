@@ -13,6 +13,8 @@ services:
       - "4318:4318" # OTLP HTTP receiver
     networks:
       - honeycomb
+    depends_on:
+      - refinery
 
   loadgen1:
     image: ghcr.io/honeycombio/loadgen/loadgen:v0.3.0
@@ -39,6 +41,24 @@ services:
       - honeycomb
     depends_on:
       - otel-collector
+
+  refinery:
+    image: honeycombio/refinery
+    ports:
+      - 8080:8080
+      - 9090:9090
+    entrypoint:
+      - "refinery"
+    command:
+      - "-c"
+      - "/etc/refinery/config.yaml"
+      - "-r"
+      - "/etc/refinery/rules.yaml"
+    volumes:
+      - ./refinery_configs/config.yaml:/etc/refinery/config.yaml
+      - ./refinery_configs/rules.yaml:/etc/refinery/rules.yaml
+    networks:
+      - honeycomb
 
 networks:
   honeycomb:
