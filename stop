@@ -8,6 +8,7 @@ if ! docker compose down -v; then
   exit 1
 fi
 
+echo ""
 echo "###############"
 echo "Services stopped successfully!"
 echo "###############"

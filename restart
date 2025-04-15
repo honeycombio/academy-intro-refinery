@@ -11,6 +11,7 @@ if ! docker compose restart "$@"; then
   exit 1
 fi
 
+echo ""
 echo "###############"
 echo "Services restarted successfully!"
 echo "###############"
