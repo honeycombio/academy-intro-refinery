@@ -10,5 +10,9 @@ Samplers:
               Operator: ">="
               Value: 500
               Datatype: int
-        - Name: Sample the rest
-          SampleRate: 10
+        - Name: Sample the rest dynamically
+          Sampler:
+            EMADynamicSampler:
+              GoalSampleRate: 15
+              FieldList:
+                - app.function

@@ -1,0 +1,24 @@
+telemetry:
+  host: "otel-collector:4317"
+  dataset: loadgen-data
+  insecure: true
+format:
+  depth: 5
+  nspans: 10
+  tracetime: 1s
+quantity:
+  tps: 1000
+  runtime: 120s
+  ramptime: 1s
+output:
+  sender: otel
+  protocol: grpc
+global:
+  loglevel: debug
+fields:
+  # simulate URLs for 10 services, each of which has 10 endpoints on the root span
+  0.url.full: /u4,5
+  # generate status codes where 5% are 400s and .1% are 500s on the root span
+  0.http.response.status_code: /st5,0.1
+  # generate a hex ID as a user_id on the root span
+  0.app.user_id: /sx24

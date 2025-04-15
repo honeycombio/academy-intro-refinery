@@ -42,6 +42,19 @@ services:
     depends_on:
       - otel-collector
 
+  loadgen3:
+    image: ghcr.io/honeycombio/loadgen/loadgen
+    env_file:
+      - .env
+    volumes:
+      - ./loadgen_configs/loadgen_config3.yaml:/etc/loadgen/config.yaml
+    command:
+      ["--config=/etc/loadgen/config.yaml"]
+    networks:
+      - honeycomb
+    depends_on:
+      - otel-collector
+
   refinery:
     image: honeycombio/refinery
     ports:
