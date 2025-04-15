@@ -1,0 +1,47 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.123.0
+    hostname: otel-collector
+    restart: always
+    env_file:
+      - .env
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./collector_configs/otelcol-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317" # OTLP gRPC receiver
+      - "4318:4318" # OTLP HTTP receiver
+    networks:
+      - honeycomb
+
+  loadgen1:
+    image: ghcr.io/honeycombio/loadgen/loadgen:v0.3.0
+    env_file:
+      - .env
+    volumes:
+      - ./loadgen_configs/loadgen_config1.yaml:/etc/loadgen/config.yaml
+    command:
+      ["--config=/etc/loadgen/config.yaml"]
+    networks:
+      - honeycomb
+    depends_on:
+      - otel-collector
+
+  loadgen2:
+    image: ghcr.io/honeycombio/loadgen/loadgen:v0.3.0
+    env_file:
+      - .env
+    volumes:
+      - ./loadgen_configs/loadgen_config2.yaml:/etc/loadgen/config.yaml
+    command:
+      ["--config=/etc/loadgen/config.yaml"]
+    networks:
+      - honeycomb
+    depends_on:
+      - otel-collector
+
+networks:
+  honeycomb:
+    driver: bridge
+
+

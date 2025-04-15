@@ -1,0 +1,40 @@
+exporters:
+  otlp:
+    endpoint: api.honeycomb.io:443
+    headers:
+      x-honeycomb-team: "${HONEYCOMB_API_KEY}"
+  debug:
+    verbosity: detailed
+
+processors:
+  memory_limiter:
+    check_interval: 5s
+    limit_mib: 800
+    spike_limit_mib: 250
+  batch: {}
+  transform/url:
+    error_mode: ignore
+    trace_statements:
+      - conditions:
+          - span.attributes["url.full"] != nil
+        statements:
+          - set(span.cache["extracts"], ExtractPatterns(span.attributes["url.full"], "^https://example.com/(?P<function>[a-z]+)/(?P<endpoint>[a-z]+)$"))
+          - set(span.attributes["app.function"], span.cache["extracts"]["function"])
+          - set(span.attributes["app.endpoint"], span.cache["extracts"]["endpoint"])
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: otel-collector:4317
+      http:
+        endpoint: otel-collector:4318
+
+service:
+  telemetry:
+    logs:
+      level: info
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, transform/url, batch]
+      exporters: [otlp]

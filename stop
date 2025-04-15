@@ -1,0 +1,14 @@
+#!/bin/sh
+
+docker compose down -v
+
+if ! docker compose down -v; then
+  echo ""
+  echo "Failed to stop services!"
+  exit 1
+fi
+
+echo "###############"
+echo "Services stopped successfully!"
+echo "###############"
+echo ""

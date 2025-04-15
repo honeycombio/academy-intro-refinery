@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Run to restart the whole system up, 5 services (one is nginx)
+# `./restart``
+# Or, run with a parameter service name (from docker-compose) to restart just that service
+# `./restart otel-collector`
+
+if ! docker compose restart "$@"; then
+  echo ""
+  echo "Failed to restart services!"
+  exit 1
+fi
+
+echo "###############"
+echo "Services restarted successfully!"
+echo "###############"
+echo ""
+echo "To see the logs, run:"
+echo "docker compose logs -f"
+echo ""
+echo "To stop the services, run:"
+echo "./stop"
+echo ""
