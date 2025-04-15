@@ -16,3 +16,4 @@ Samplers:
               GoalSampleRate: 15
               FieldList:
                 - app.function
+                - app.user_id
