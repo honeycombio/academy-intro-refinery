@@ -14,7 +14,7 @@ output:
   sender: otel
   protocol: grpc
 global:
-  loglevel: debug
+  loglevel: warn
 fields:
   # simulate URLs for 3 services, each of which has 5 endpoints on the root span
   0.url.full: /u3,5
