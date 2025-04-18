@@ -1,6 +1,8 @@
 exporters:
   otlp:
-    endpoint: api.honeycomb.io:443
+    endpoint: refinery:9090
+    tls:
+      insecure: true
     headers:
       x-honeycomb-team: "${HONEYCOMB_API_KEY}"
   debug:
