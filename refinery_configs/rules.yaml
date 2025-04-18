@@ -13,7 +13,8 @@ Samplers:
         - Name: Sample the rest dynamically
           Sampler:
             EMADynamicSampler:
-              GoalSampleRate: 15
+              GoalSampleRate: 10
               FieldList:
                 - app.function
+                - app.endpoint
                 - app.user_id
