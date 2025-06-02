@@ -1,6 +1,6 @@
-# Honeycomb Academy: Introduction to Refinery - Hands On Labs
+# Honeycomb Academy: Introduction to Refinery - Hands On Lab
 
-***This is a demo app, don't run it in production***
+***This is a demo app, don't run it in production!***
 
 This contains the foundations of what's needed for automatically generating trace data that can be used to help learners understand the effects of sampling with Refinery on their data in Honeycomb.
 
@@ -14,23 +14,7 @@ Hello! Welcome to the **Introduction to Refinery** course lab.
 
 ## Running the application
 
-To run this app, you can use GitPod or Codespaces.
-
-Once you run the application, you can send traces to Honeycomb. Then you can practice improving the instrumentation for better observability.
-
-### GitHub Codespaces setup
-
-Open the repository on GitHub. Open the `<> Code` dropdown down menu.
-
-Select the `Codespaces` tab. Create a codespace on main.
-
-### GitPod setup
-
-Go to [Gitpod](https://gitpod.io/#https://github.com/honeycombio/academy-intro-refinery) to open the repository.
-
-Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor. The default settings are acceptable.
-
-Once you are in the code editor, run `docker compose up` in the code editor's terminal. To stop running the application, run `ctrl+c`. Then run `docker compose down` to remove the container.
+Once you run the application, you can send traces to Honeycomb.
 
 ### Local development setup
 
@@ -39,7 +23,7 @@ You also have the option to run this application locally.
 First, clone this repository.
 
 ```bash
-git clone https://github.com/honeycombio/academy-instrumentation-java.git
+git clone https://github.com/honeycombio/academy-intro-refinery.git
 ```
 
 Install Docker: <https://docs.docker.com/get-docker/>
@@ -62,7 +46,9 @@ After making changes to a service, you can tell it to rebuild just that one:
 
 `./run [ otel-collector | loadgen[123] | refinery ]`
 
-Note: not all services are present in the main branch so some services won't start until they've been added to the docker-compose.yaml file
+Note: not all services are present in the main branch so some services won't start until they've been added to the `docker-compose.yaml` file.
+
+Note: This course assumes you're using Linux or macOS. If you're using Windows, use WSL.
 
 ### Stop the app
 
